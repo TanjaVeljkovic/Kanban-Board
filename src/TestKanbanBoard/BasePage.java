@@ -8,118 +8,89 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
 
-
-//private static final String Assert = null;
-	//private static final String Assume = null;
-	//private static final String WebDriverManager = null;
 	WebDriver driver;
-	
+
 	public BasePage(WebDriver driver) {
-		
+
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	//private static String PAGE_URL = "https://kanban-board-two.vercel.app/";
+
 	protected By pageLink = By.xpath("https://kanban-board-two.vercel.app/");
-	//protected By addNewTicketIcon = By.className("sc-Axmtr hvJMgY");  
 	protected By addNewTicketIcon = By.xpath("//div[@class='sc-AxheI dNrDWH']/button[@aria-label='Add new ticket']");
-	//protected By newTicketCreated = By.className("sc-AxjAm jOSNSb");
-	protected By newTicketCreated = By.className("//div[@data-testId='ticket']");
-	//protected By newTicketCreated = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[2]/div[1]/div");
-	protected By dragTicket = By.xpath("//*[@id=\\\"root\\\"]/div/div/div/div[1]/div[2]/div[1]");
-	protected By drop1 = By.className("sc-fzoLsD bmXcrz"); 
-	protected By drop2 = By.className("sc-fzoLsD iFWCam");
-	protected By editTicketContent = By.className("sc-AxjAm eMIbNL");
-	protected By emptyTicketContent = By.className("sc-AxhCb gyMAAG");
+	protected By newTicketCreated = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[2]/div[1]/div");
+	protected By dragTicket = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[2]/div[1]");
+	protected By drop1 = By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[2]");
+	protected By drop2 = By.xpath("//*[@id=\"root\"]/div/div/div/div[3]/div[2]");
+	protected By editTicketContent = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[2]/div[1]/div/textarea");
+	// protected By emptyTicketContent = By.className("sc-AxhCb gyMAAG");
 	protected By hoverTicket = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[2]/div[1]/div/span");
-	protected By deleteTicketIcon = By.className("sc-AxiKw eSbheu");
-	protected By numberOfTicketsinColumn1 = By.className("sc-fzozJi dteCCc");
-	protected By numberOfTicketsinColumn2 = By.className("sc-fzozJi dteCCc");
-	protected By numberOfTicketsinColumn3 = By.className("sc-fzozJi dteCCc");
-	
-	//private By panelHeading = By.className("panel-heading");
-	
-	
+	protected By deleteTicketIcon = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[2]/div[1]/div/button");
+	protected By numberOfTicketsinColumn1 = By.xpath("//*[@id=\"root\"]/div/div/div/div[1]/div[1]/div");
+	protected By numberOfTicketsinColumn2 = By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div[1]/div");
+	protected By numberOfTicketsinColumn3 = By.xpath("//*[@id=\"root\"]/div/div/div/div[3]/div[1]/div");
+
 	WebElement newTicketElement = driver.findElement(addNewTicketIcon);
-	WebElement newTicketIsCreated = driver.findElement(newTicketCreated);//nova katica
-	//WebElement numberChanges = driver.findElement(numberOfTicketsinColumn1);
-	
-	Actions action = new Actions(driver); 
+	WebElement newTicketIsCreated = driver.findElement(newTicketCreated);
+
+	Actions action = new Actions(driver);
+
 	public void addNewTicket() {
-		action.click(newTicketElement).perform();		
+		action.click(newTicketElement).perform();
 	}
-	
-	
-	//Actions action = new Actions(driver);
-	
-     
-     WebElement dragThisTicket = driver.findElement(dragTicket);
-	 WebElement dropToThisColumn = driver.findElement(drop1);
-	 WebElement dropToOtherColumn = driver.findElement(drop2);
-	   
-	
-	 
-	 WebElement NumberTicket1 = driver.findElement(numberOfTicketsinColumn1);
-	 WebElement NumberTicket2 = driver.findElement(numberOfTicketsinColumn2);
-	 WebElement NumberTicket3 = driver.findElement(numberOfTicketsinColumn3);
-	   
-	//Actions action = new Actions(driver); 
-	 public void dragDrop() {
-	      action.dragAndDrop(dragThisTicket, dropToThisColumn).perform();  
-	 }
-	 // drag and drop
-	    
-	public void dragDrop2(){
-		action.dragAndDrop(dragThisTicket, dropToOtherColumn).perform(); 
-				
+
+	WebElement dragThisTicket = driver.findElement(dragTicket);
+	WebElement dropToThisColumn = driver.findElement(drop1);
+	WebElement dropToOtherColumn = driver.findElement(drop2);
+
+	WebElement NumberTicket1 = driver.findElement(numberOfTicketsinColumn1);
+	WebElement NumberTicket2 = driver.findElement(numberOfTicketsinColumn2);
+	WebElement NumberTicket3 = driver.findElement(numberOfTicketsinColumn3);
+
+	public void dragDrop() {
+		action.dragAndDrop(dragThisTicket, dropToThisColumn).perform();
 	}
-	 
-	
-	  
-	 WebElement emptyTicket = driver.findElement(emptyTicketContent); 
-	 WebElement editTicket = driver.findElement(editTicketContent); 
-	
-	 //Actions action = new Actions(driver);
-	 
-	 public void emptyTicketField() {
-		 action.doubleClick(emptyTicket).perform(); 
-		 editTicket.sendKeys("HELLO!");
-	 }
-	 
-	
-	
-	 WebElement ticketElement = driver.findElement(hoverTicket);
+	// drag and drop
 
-	 //Actions action = new Actions(driver);
+	public void dragDrop2() {
+		action.dragAndDrop(dragThisTicket, dropToOtherColumn).perform();
 
-	 public void moveHoverIcon(){
-		 action.moveToElement(ticketElement).perform();  
-	 }
-	 
+	}
 
-	 WebElement deleteTicketElement = driver.findElement(deleteTicketIcon);
+	// WebElement emptyTicket = driver.findElement(emptyTicketContent);
+	WebElement editTicket = driver.findElement(editTicketContent);
 
- 
-	 WebElement deleteElement = driver.findElement(deleteTicketIcon);
-	// Actions action = new Actions(driver);
-	
-	 public void moveHandOnDelete() {
-		 action.moveToElement(ticketElement).perform();  
-	 }
-	 
+	public void emptyTicketField() {
+		action.doubleClick(editTicket).perform();
+		editTicket.sendKeys("HELLO!");
+	}
+
+	WebElement ticketElement = driver.findElement(hoverTicket);
+
+	public void moveHoverIcon() {
+		action.moveToElement(ticketElement).perform();
+	}
+
+	WebElement deleteTicketElement = driver.findElement(deleteTicketIcon);
+
+	WebElement deleteElement = driver.findElement(deleteTicketIcon);
+
+	public void moveHandOnDelete() {
+		action.moveToElement(ticketElement).perform();
+	}
+
 	public void clickDeleteButton() {
-		
-		action.click(deleteElement).perform();	
-	}
-	 
 
-	
-	
-	
-	
-	
-	
-	 
-	
-	
+		action.click(deleteElement).perform();
+
+	}
+
+	WebElement numberOfTicketsShown = driver.findElement(numberOfTicketsinColumn1);
+
+	public void numberOfTicketVisable() {
+
+		action.click(newTicketElement).perform();
+
+	}
+
 }
